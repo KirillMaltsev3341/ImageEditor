@@ -10,15 +10,14 @@ Types of files that can be processed:
 - [Installation](#installation)
   - [Quick installation](#quick-installation)
   - [Manually installation](#manually-installation)
-- [Testing](#tesing)
+- [Testing](#testing)
 - [Compilation](#compilation)
 - [Agreements](#agreements)
 
 <a name="preliminary-requirements"></a>
 ## Preliminary requirements
-- g++
-- make
-- libpng (+zlib)
+- libpng
+- zlib
 
 
 <a name="installation"></a>
@@ -26,9 +25,8 @@ Types of files that can be processed:
 
 <a name="quick-installation"></a>
 ### Quick installation
-If you want a quick installation, just enter these lines into the console:
 
-```
+```bash
 git clone ...
 cd ImageEditor
 make install_required_soft
@@ -41,20 +39,17 @@ To install required software by yourself visit:
 - [libpng](https://github.com/pnggroup/libpng) (with a normal installation, zlib is automatically installed)
 - [zlib](https://github.com/madler/zlib)
 
-Next, enter these lines into the console:
-
 ```bash
 git clone ...
 cd ImageEditor
 make
 ```
 
-The shared library will be located in the **lib** folder and will have the name *libImageEditor.so*
+The shared library will be located in the ***lib*** folder and will have the name ***libImageEditor.so***
 
 
 <a name="testing"></a>
 ## Testing
-To check if everything is working correctly use:
 
 ```bash
 make test
@@ -86,13 +81,9 @@ int main()
 }
 ```
 
-To compile it:
-
 ```bash
 g++ main.cpp -Wl,-rpath={...}/ImageEditor/lib -L{...}/ImageEditor/lib -lImageEditor -I{...}/ImageEditor/include
 ```
-
-After running the a.out file, you should get the result.png file
 
 <a name="agreements"></a>
 ## Agreements

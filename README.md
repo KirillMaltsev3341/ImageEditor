@@ -11,7 +11,7 @@ Types of files that can be processed:
   - [Quick installation](#quick-installation)
   - [Manually installation](#manually-installation)
 - [Testing](#testing)
-- [Compilation](#compilation)
+- [Example](#example)
 - [Agreements](#agreements)
 
 <a name="preliminary-requirements"></a>
@@ -55,9 +55,8 @@ The shared library will be located in the ***lib*** folder and will have the nam
 make test
 ```
 
-<a name="compilation"></a>
-## Compilation
-Example code:
+<a name="example"></a>
+## Example
 
 ```C++
 #include "ImageEditor.h"

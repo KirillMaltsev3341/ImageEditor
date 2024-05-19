@@ -87,5 +87,5 @@ g++ main.cpp -Wl,-rpath={...}/ImageEditor/lib -L{...}/ImageEditor/lib -lImageEdi
 
 <a name="agreements"></a>
 ## Agreements
-- 1. The global discrete coordinates of a pixel are located in its center.  
+  1. The global discrete coordinates of a pixel are located in its center.  
 ![Image alt](https://github.com/KirillMaltsev3341/Images/raw/main/Coordinates.png)

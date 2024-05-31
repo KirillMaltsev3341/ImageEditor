@@ -65,16 +65,16 @@ make test
 int main()
 {
     ie::ImagePNG image;
-    image.setSize(800, 800);
+    image.setSize(400, 400);
 
-    image.drawCircle(150, 200, 40, 8, {255, 0, 255, 255}, true, {0, 0, 255, 255});
+    image.drawCircle(200, 200, 120, 8, {255, 0, 0, 255}, true, {0, 0, 255, 255});
     
     image.drawPolygon(
         {
-            {400, 400},
-            {580, 350},
-            {500, 560}
-        }, 4, {255, 255, 255, 255}, true, {0, 128, 0, 255}
+            {118, 120},
+            {282, 120},
+            {200, 314}
+        }, 2, {255, 255, 255, 255}, true, {0, 255, 0, 255}
     );
 
     image.writeImageToFile("result.png");
@@ -84,6 +84,9 @@ int main()
 ```bash
 g++ main.cpp -Wl,-rpath={...}/ImageEditor/lib -L{...}/ImageEditor/lib -lImageEditor -I{...}/ImageEditor/include
 ```
+
+Result:  
+![Image alt](https://github.com/KirillMaltsev3341/Images/raw/main/result.png)
 
 <a name="agreements"></a>
 ## Agreements

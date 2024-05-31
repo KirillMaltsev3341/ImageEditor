@@ -96,7 +96,8 @@ Result:
 
 <a name="additionally"></a>
 ## Additionally
-OF COURSE, THE PROJECT STRUCTURE IS FAR FROM PERFECT, but who cares lol...  
+first: OF COURSE, THE PROJECT STRUCTURE IS FAR FROM PERFECT, but who cares lol...  
+second: just look here [source of inspiration](https://github.com/SFML/SFML)
 CPP files are removed after building, soooooo draw conclusions  
 it was possible to make 100500 inheritances and layers of abstraction but I am lazy ass  
 Haters be like:  

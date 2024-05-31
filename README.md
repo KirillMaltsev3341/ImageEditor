@@ -82,7 +82,7 @@ int main()
 ```
 
 ```bash
-g++ main.cpp -Wl,-rpath={...}/ImageEditor/lib -L{...}/ImageEditor/lib -lImageEditor -I{...}/ImageEditor/include
+g++ main.cpp -I{...}/ImageEditor/include -Wl,-rpath={...}/ImageEditor/lib -L{...}/ImageEditor/lib -lImageEditor
 ```
 
 Result:  

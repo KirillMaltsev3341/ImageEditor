@@ -94,6 +94,7 @@ g++ main.cpp -Wl,-rpath={...}/ImageEditor/lib -L{...}/ImageEditor/lib -lImageEdi
 <a name="additionally"></a>
 ## Additionally
 OF COURSE, THE PROJECT STRUCTURE IS FAR FROM PERFECT, but who cares lol...  
-CPP files are removed after building, soooooo draw conclusions
-it was possible to make 100500 inheritances and layers of abstraction but I am lazy ass
+CPP files are removed after building, soooooo draw conclusions  
+it was possible to make 100500 inheritances and layers of abstraction but I am lazy ass  
+Haters be like:  
 ![Image alt](https://github.com/KirillMaltsev3341/Images/raw/main/Hater.jpeg)

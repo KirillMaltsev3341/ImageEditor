@@ -8,12 +8,12 @@
  * 
  */
 
-#include "ImagePNG.h"
+#include "ImageBMP.h"
 #include <queue>
 
-void ie::ImagePNG::floodFill(int x, int y, ColorRGBA color)
+void ie::ImageBMP::floodFill(int x, int y, ColorBGR color)
 {
-    ColorRGBA start_color = getColor(x, y);
+    ColorBGR start_color = getColor(x, y);
 
     std::queue<Coord> coords;
     coords.push({x, y});

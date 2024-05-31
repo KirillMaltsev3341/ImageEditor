@@ -1,6 +1,6 @@
 /**
  * @file ImagePNG.cpp
- * @brief Implementation of the class constructor and destructor + error handling function
+ * @brief Implementation of the class constructor and destructor + showImageInfo method
  * @version 0.1.0
  * @date 2024-05-19
  * 
@@ -11,12 +11,6 @@
 #include "ImagePNG.h"
 #include <stdlib.h>
 
-
-void ie::throwError(const char *error_massage, int exit_code)
-{
-    printf("%s\n", error_massage);
-    exit(exit_code);
-}
 
 ie::ImagePNG::ImagePNG() :
     pixel_size_         (4),
@@ -37,5 +31,9 @@ ie::ImagePNG::ImagePNG() :
 ie::ImagePNG::~ImagePNG()
 {
     freeMemmoryForRowPointers();
-    freeMemmoryForColoredPixels();
+}
+
+void ie::ImagePNG::showInfo()
+{
+    printf("%d x %d, %d-bit/color, color type - %d\n", width_, height_, bit_depth_, color_type_);
 }

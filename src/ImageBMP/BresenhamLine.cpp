@@ -8,11 +8,11 @@
  * 
  */
 
-#include "ImagePNG.h"
+#include "ImageBMP.h"
 #include <algorithm>
 
 
-void ie::ImagePNG::drawBresenhamLineLow(int x0, int y0, int x1, int y1, ColorRGBA color)
+void ie::ImageBMP::drawBresenhamLineLow(int x0, int y0, int x1, int y1, ColorBGR color)
 {
     int dx = x1 - x0;
     int dy = y1 - y0;
@@ -35,7 +35,7 @@ void ie::ImagePNG::drawBresenhamLineLow(int x0, int y0, int x1, int y1, ColorRGB
     }
 }
 
-void ie::ImagePNG::drawBresenhamLineHigh(int x0, int y0, int x1, int y1, ColorRGBA color)
+void ie::ImageBMP::drawBresenhamLineHigh(int x0, int y0, int x1, int y1, ColorBGR color)
 {
 
     int dx = x1 - x0;
@@ -59,7 +59,7 @@ void ie::ImagePNG::drawBresenhamLineHigh(int x0, int y0, int x1, int y1, ColorRG
     }
 }
 
-void ie::ImagePNG::drawBresenhamLine(int x0, int y0, int x1, int y1, ColorRGBA color)
+void ie::ImageBMP::drawBresenhamLine(int x0, int y0, int x1, int y1, ColorBGR color)
 {
     if (abs(y1 - y0) < abs(x1 - x0)) {
         if (x0 > x1) {

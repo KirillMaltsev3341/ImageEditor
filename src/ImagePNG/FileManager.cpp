@@ -10,14 +10,15 @@
 
 
 #include "ImagePNG.h"
+#include "Error.h"
 #include <png.h>
 
 
-bool ie::checkFileValidity(FILE *input_file)
+bool ie::ImagePNG::checkFileValidity(FILE *input_file)
 {
-    png_byte signature[SIG_BYTES];
-    fread(signature, sizeof(png_byte), SIG_BYTES, input_file);
-    return (png_sig_cmp(signature, 0, SIG_BYTES) == 0);
+    png_byte signature[PNG_SIG_BYTES];
+    fread(signature, sizeof(png_byte), PNG_SIG_BYTES, input_file);
+    return (png_sig_cmp(signature, 0, PNG_SIG_BYTES) == 0);
 }
 
 void ie::ImagePNG::readInfoFields()
@@ -71,12 +72,12 @@ void ie::ImagePNG::readImageFromFile(const char *input_file_name)
     FILE* fin = fopen(input_file_name, "rb");
     
     if (!fin) {
-        throwError("Error: file could not be opened.", FILE_ERROR);
+        throwError("Error: file could not be opened.", PNG_FILE_ERROR);
     }
     
     if (!checkFileValidity(fin)) {
         fclose(fin);
-        throwError("Error: wrong file format.", FILE_ERROR);
+        throwError("Error: wrong file format.", PNG_FILE_ERROR);
     }
     
     png_ptr_ = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
@@ -106,7 +107,7 @@ void ie::ImagePNG::readImageFromFile(const char *input_file_name)
     }
     png_init_io(png_ptr_, fin);
 
-    png_set_sig_bytes(png_ptr_, SIG_BYTES);
+    png_set_sig_bytes(png_ptr_, PNG_SIG_BYTES);
     png_read_info(png_ptr_, info_ptr_);
     readInfoFields();
     transformInput();
@@ -121,7 +122,6 @@ void ie::ImagePNG::readImageFromFile(const char *input_file_name)
     }
 
     allocateMemmoryForRowPointers();
-    allocateMemmoryForColoredPixels();
     clear();
 
     png_read_image(png_ptr_, row_pointers_);
@@ -142,7 +142,7 @@ void ie::ImagePNG::writeImageToFile(const char *output_file_name)
     FILE *fout = fopen(output_file_name, "wb");
     if (!fout) {
         fclose(fout);
-        throwError("Error: file could not be opened.", FILE_ERROR);
+        throwError("Error: file could not be opened.", PNG_FILE_ERROR);
     }
 
     png_structp png_ptr_ = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
@@ -208,69 +208,4 @@ void ie::ImagePNG::writeImageToFile(const char *output_file_name)
     png_destroy_write_struct(&png_ptr_, &info_ptr_);
 
     fclose(fout);
-}
-
-
-void ie::showImageInfo(const char *input_file_name)
-{
-    FILE* fin = fopen(input_file_name, "rb");
-    
-    if (!fin) {
-        throwError("Error: file could not be opened.", FILE_ERROR);
-    }
-    
-    if (!checkFileValidity(fin)) {
-        fclose(fin);
-        throwError("Error: wrong file format.", FILE_ERROR);
-    }
-    
-    png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-    if (!png_ptr) {
-        fclose(fin);
-        throwError("Error: png_create_read_struct failed.", PNG_PROCESSING_ERROR);
-    }
-
-    png_infop info_ptr = png_create_info_struct(png_ptr);
-    if (!info_ptr) {
-        png_destroy_read_struct(&png_ptr, (png_infopp)NULL, (png_infopp)NULL);
-        fclose(fin);
-        throwError("Error: (info_ptr) png_create_info_struct failed.", PNG_PROCESSING_ERROR);
-    }
-    
-    png_infop end_info_ptr = png_create_info_struct(png_ptr);
-    if (!end_info_ptr) {
-        png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
-        fclose(fin);
-        throwError("Error: (end_info_ptr) png_create_info_struct failed.", PNG_PROCESSING_ERROR);
-    }
-
-    if (setjmp(png_jmpbuf(png_ptr))) {
-        png_destroy_read_struct(&png_ptr, &info_ptr, &end_info_ptr);
-        fclose(fin);
-        throwError("Error: png_init_io failed.", PNG_PROCESSING_ERROR);
-    }
-
-
-    png_init_io(png_ptr, fin);
-
-    png_set_sig_bytes(png_ptr, SIG_BYTES);
-    png_read_info(png_ptr, info_ptr);
-
-    
-    png_uint_32    width;
-    png_uint_32    height;
-    int            bit_depth;
-    int            color_type;
-    int            interlace_type;
-    int            compression_type;
-    int            filter_type;
-    
-    png_get_IHDR(png_ptr, info_ptr, &width, &height, 
-         &bit_depth, &color_type, &interlace_type, 
-         &compression_type, &filter_type);
-    
-    png_destroy_read_struct(&png_ptr, &info_ptr, &end_info_ptr);
-    fclose(fin);
-
-    printf("%s: %d x %d, %d-bit/color, color type - %d\n", input_file_name, width, height, bit_depth, color_type);
 }

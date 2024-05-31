@@ -11,10 +11,10 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
-#define R_IDX        0
-#define G_IDX        1
-#define B_IDX        2
-#define A_IDX        3
+#define R_IDX  0
+#define G_IDX  1
+#define B_IDX  2
+#define A_IDX  3
 
 
 /**
@@ -37,15 +37,14 @@ struct Coord
 
 
 /**
- * @brief Structure for representing pixel color
+ * @brief Structure for representing pixel color BGR
  * 
  */
-struct Color
+struct ColorBGR
 {
-    int r; ///< red component
-    int g; ///< green component
-    int b; ///< blue component
-    int a; ///< alpha component
+    unsigned char b;
+    unsigned char g;
+    unsigned char r;
 
     /**
      * @brief Check if colors are the same
@@ -54,7 +53,70 @@ struct Color
      * @return true - if the same
      * @return false - if not the same
      */
-    bool operator==(Color other)
+    bool operator==(ColorBGR other)
+    {
+        return (b == other.b) && 
+               (g == other.g) && 
+               (r == other.r);
+    }
+
+
+    /**
+     * @brief Check if colors are not the same
+     * 
+     * @param[in] other object for comparison
+     * @return true - if not the same
+     * @return false - if the same
+     */
+    bool operator!=(ColorBGR other)
+    {
+        return !(*this == other);
+    }
+
+    /**
+     * @brief inverse pixel color
+     * 
+     */
+    void inverse()
+    {
+        b = 255 - b;
+        g = 255 - g;
+        r = 255 - r;
+    }
+
+
+    /**
+     * @brief convert pixel color to black and white
+     * 
+     */
+    void gray()
+    {
+        b = (0.299 * r) + (0.587 * g) + (0.114 * b);
+        g = (0.299 * r) + (0.587 * g) + (0.114 * b);
+        r = (0.299 * r) + (0.587 * g) + (0.114 * b);
+    }
+};
+
+
+/**
+ * @brief Structure for representing pixel color RGBA
+ * 
+ */
+struct ColorRGBA
+{
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+    unsigned char a;
+
+    /**
+     * @brief Check if colors are the same
+     * 
+     * @param[in] other object for comparison
+     * @return true - if the same
+     * @return false - if not the same
+     */
+    bool operator==(ColorRGBA other)
     {
         return (r == other.r) && 
                (g == other.g) && 
@@ -70,7 +132,7 @@ struct Color
      * @return true - if not the same
      * @return false - if the same
      */
-    bool operator!=(Color other)
+    bool operator!=(ColorRGBA other)
     {
         return !(*this == other);
     }

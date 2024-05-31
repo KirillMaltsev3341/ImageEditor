@@ -8,13 +8,13 @@
  * 
  */
 
-#include "ImagePNG.h"
+#include "ImageBMP.h"
 #include <vector>
 #include <limits.h>
 #include <algorithm>
 
 
-bool ie::ImagePNG::inPolygon(int x0, int y0, std::vector<Coord>& vertices)
+bool ie::ImageBMP::inPolygon(int x0, int y0, std::vector<Coord>& vertices)
 {
     int intersections_counter = 0;
     for (int i = 0; i < vertices.size(); i++) {
@@ -35,7 +35,7 @@ bool ie::ImagePNG::inPolygon(int x0, int y0, std::vector<Coord>& vertices)
     return (intersections_counter % 2);
 }
 
-void ie::ImagePNG::getPolygonIntersections(std::vector<std::pair<int, int>>& intersections, 
+void ie::ImageBMP::getPolygonIntersections(std::vector<std::pair<int, int>>& intersections, 
     int y, std::vector<ie::Coord>& vertices)
 {
     for (int i = 0; i < vertices.size(); i++) {
@@ -54,7 +54,7 @@ void ie::ImagePNG::getPolygonIntersections(std::vector<std::pair<int, int>>& int
     }
 }
 
-void ie::ImagePNG::fillPolygon(std::vector<Coord>& vertices, ColorRGBA& fill_color)
+void ie::ImageBMP::fillPolygon(std::vector<Coord>& vertices, ColorBGR& fill_color)
 {
     int y_min = INT_MAX;
     int y_max = INT_MIN;
@@ -70,7 +70,7 @@ void ie::ImagePNG::fillPolygon(std::vector<Coord>& vertices, ColorRGBA& fill_col
             {
                 return abs(a.first * b.second) < abs(b.first * a.second);
             });
-        
+
         for (int i = 0; i < intersections.size(); i += 2) {
             
             int x_start = intersections[i].first / intersections[i].second;
@@ -87,8 +87,8 @@ void ie::ImagePNG::fillPolygon(std::vector<Coord>& vertices, ColorRGBA& fill_col
     }
 }
 
-void ie::ImagePNG::drawPolygon(std::vector<Coord> vertices, int thickness, 
-    ColorRGBA color, bool fill, ColorRGBA fill_color)
+void ie::ImageBMP::drawPolygon(std::vector<Coord> vertices, int thickness, 
+    ColorBGR color, bool fill, ColorBGR fill_color)
 {
     if (fill) {
         fillPolygon(vertices, fill_color);

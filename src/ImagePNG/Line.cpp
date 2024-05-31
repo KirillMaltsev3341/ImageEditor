@@ -13,7 +13,7 @@
 
 
 void ie::ImagePNG::drawLineLow(int x0, int y0, int x1, int y1, 
-    int thickness, Color color)
+    int thickness, ColorRGBA color)
 {
     int dx = x1 - x0;
     int dy = y1 - y0;
@@ -37,7 +37,7 @@ void ie::ImagePNG::drawLineLow(int x0, int y0, int x1, int y1,
 }
 
 void ie::ImagePNG::drawLineHigh(int x0, int y0, int x1, int y1, 
-    int thickness, Color color)
+    int thickness, ColorRGBA color)
 {
 
     int dx = x1 - x0;
@@ -62,7 +62,7 @@ void ie::ImagePNG::drawLineHigh(int x0, int y0, int x1, int y1,
 }
 
 void ie::ImagePNG::drawLine(int x0, int y0, int x1, int y1, 
-    int thickness, Color color)
+    int thickness, ColorRGBA color)
 {
     if (abs(y1 - y0) < abs(x1 - x0)) {
         if (x0 > x1) {

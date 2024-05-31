@@ -8,10 +8,10 @@
  * 
  */
 
-#include "ImagePNG.h"
+#include "ImageBMP.h"
 
 
-void ie::ImagePNG::drawBresenhamCircle(int x0, int y0, int radius, ColorRGBA color)
+void ie::ImageBMP::drawBresenhamCircle(int x0, int y0, int radius, ColorBGR color)
 {
     int D = 3 - 2 * radius;
     int x = 0;

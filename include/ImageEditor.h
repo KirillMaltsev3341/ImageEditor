@@ -11,11 +11,10 @@
 #ifndef IMAGE_EDITOR
 #define IMAGE_EDITOR
 
-////////////////////////////////////////////////////////////
-// Headers
-////////////////////////////////////////////////////////////
-#include "Structures.h"
 
+#include "Structures.h"
 #include "ImagePNG.h"
+#include "ImageBMP.h"
+
 
 #endif

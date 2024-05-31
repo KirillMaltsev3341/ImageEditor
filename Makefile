@@ -7,7 +7,7 @@ LIB_DIR = ./lib
 
 CXXFLAGS = -I$(HEADER_DIR) --shared -fPIC -lpng
 
-SRC = $(wildcard $(CORE_DIR)/ImagePNG/*.cpp)
+SRC = $(wildcard $(CORE_DIR)/*.cpp) $(wildcard $(CORE_DIR)/ImagePNG/*.cpp) $(wildcard $(CORE_DIR)/ImageBMP/*.cpp)
 
 all : create_lib_folder $(TARGET)
 

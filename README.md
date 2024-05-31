@@ -28,7 +28,7 @@ Types of files that can be processed:
 ### Quick installation
 
 ```bash
-git clone ...
+git clone https://github.com/KirillMaltsev3341/ImageEditor.git
 cd ImageEditor
 make install_required_soft
 make
@@ -41,7 +41,7 @@ To install required software by yourself visit:
 - [zlib](https://github.com/madler/zlib)
 
 ```bash
-git clone ...
+git clone https://github.com/KirillMaltsev3341/ImageEditor.git
 cd ImageEditor
 make
 ```

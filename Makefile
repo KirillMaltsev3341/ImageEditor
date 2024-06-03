@@ -1,27 +1,33 @@
 TARGET = libImageEditor.so
 CXX = g++
 
-CORE_DIR = ./src
-HEADER_DIR = ./include
+SRC_DIR = ./src
+INCLUDE_DIR = ./include
 LIB_DIR = ./lib
 
-CXXFLAGS = -I$(HEADER_DIR) --shared -fPIC -lpng
+CXXFLAGS = -I$(INCLUDE_DIR) --shared -fPIC
+LDFLAGS = -lpng
 
-SRC = $(wildcard $(CORE_DIR)/*.cpp) $(wildcard $(CORE_DIR)/ImagePNG/*.cpp) $(wildcard $(CORE_DIR)/ImageBMP/*.cpp)
+rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 
-all : create_lib_folder $(TARGET)
+SRC = $(call rwildcard,$(SRC_DIR),*.cpp)
+
+all : create_lib_dir $(TARGET)
 
 $(TARGET) : $(SRC)
-	g++ $^ $(CXXFLAGS) -o $(LIB_DIR)/$@
+	g++ $^ $(CXXFLAGS) $(LDFLAGS) -o $(LIB_DIR)/$@
 
 install_required_soft : 
-	user sudo apt-get install libpng-dev -y
+	sudo apt-get install libpng-dev -y
 
-create_lib_folder :
+remove_src_dir :
+	# @rm -rf $(SRC_DIR)
+
+create_lib_dir :
 	@mkdir -p $(LIB_DIR)
 
 clean :
 	@rm -rf $(LIB_DIR)
 
 test :
-	
+	@echo There are no tests yet :\(
